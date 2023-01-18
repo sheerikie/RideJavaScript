@@ -1,6 +1,6 @@
 const request = require('supertest');
 const express = require('express');
-const app = express();
+const app = require('express');
 
 describe('Test the root path', () => {
     test('It should response the GET method', async () => {

@@ -12,7 +12,7 @@ const adminAuth = (req, res, next) => {
     if (username == 'admin' && password == 'password') {
       next();
     } else {
-      res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
   };
   let drivers = [{ id: 1, name: 'John Doe', status: 'active' }, { id: 2, name: 'Jane Smith', status: 'active' }];
@@ -22,7 +22,7 @@ const adminAuth = (req, res, next) => {
     console.log('name',name)
     const newDriver = { id: drivers.length + 1, name, status: 'active' };
     drivers.push(newDriver);
-    res.status(201).json({ message: 'Driver created', driver: newDriver });
+   return res.status(201).json({ message: 'Driver created', driver: newDriver });
   });
   
   app.put('/suspend-driver/:id', adminAuth, (req, res) => {
@@ -30,9 +30,9 @@ const adminAuth = (req, res, next) => {
     const driverIndex = drivers.findIndex(driver => driver.id === parseInt(id));
     if (driverIndex !== -1) {
       drivers[driverIndex].status = 'suspended';
-      res.status(200).json({ message: 'Driver suspended', driver: drivers[driverIndex] });
+      return res.status(200).json({ message: 'Driver suspended', driver: drivers[driverIndex] });
     } else {
-      res.status(404).json({ message: 'Driver not found' });
+      return res.status(404).json({ message: 'Driver not found' });
     }
   });
   let rides = [];
@@ -41,7 +41,7 @@ const adminAuth = (req, res, next) => {
     const { name } = req.body;
     const newPassenger = { id: rides.length + 1, name };
     rides.push(newPassenger);
-    res.status(201).json({ message: 'Passenger registered', passenger: newPassenger });
+    return res.status(201).json({ message: 'Passenger registered', passenger: newPassenger });
   });
   
   app.post('/start-ride/:passengerId/:driverId', adminAuth, (req, res) => {
