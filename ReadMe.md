@@ -1,6 +1,6 @@
 # Transport Service Project
 
-This is a simple project that demonstrates how to build a Node.js application using JavaScript.
+This is a simple project that describes a Node.js transport application using JavaScript.
 
 ## Prerequisites
 
